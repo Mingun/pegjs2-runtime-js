@@ -1,0 +1,17 @@
+{
+  "name": "@pegjs2/runtime",
+  "version": "1.0.0",
+  "description": "JS runtime support for parsers generated with pegjs2 (https://github.com/Mingun/pegjs)",
+  "repository": "Mingun/pegjs2-runtime-js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "PEG",
+    "parser",
+    "runtime",
+    "js"
+  ],
+  "author": "Mingun",
+  "license": "MIT"
+}
