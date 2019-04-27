@@ -99,6 +99,53 @@ class ParserState {
     throw this.buildError();
   }
 
+  matchAny() {
+    let off = this._offset;
+    if (this.input.length > off) {
+      ++this._offset;
+      return this.input.charAt(off);
+    }
+    return ParserState.FAILED;
+  }
+
+  matchClass(regexp) {
+    let off = this._offset;
+    let chr = this.input.charAt(off);
+    if (regexp.test(chr)) {
+      ++this._offset;
+      return chr;
+    }
+    return ParserState.FAILED;
+  }
+
+  matchChar(char, charCode) {
+    if (this.input.charCodeAt(this._offset) === charCode) {
+      ++this._offset;
+      return char;
+    }
+    return ParserState.FAILED;
+  }
+
+  matchLiteral(literal) {
+    let len = literal.length;
+    let txt = this.input.substr(this._offset, len);
+    if (txt === literal) {
+      this._offset += len;
+      return literal;
+    }
+    return ParserState.FAILED;
+  }
+
+  matchLiteralIC(literal) {
+    let len = literal.length;
+    let txt = this.input.substr(this._offset, len);
+    if (txt.toLowerCase() === literal) {
+      this._offset += len;
+      return txt;
+    }
+    return ParserState.FAILED;
+  }
+
   //{ Internal API
   _computeLocation(startPos, endPos) {
     let startPosDetails = this._computePosDetails(startPos);
