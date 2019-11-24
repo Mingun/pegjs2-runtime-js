@@ -12,8 +12,19 @@ function buildStructuredError(expected, found, location) {
 }
 
 class ParserState {
-  constructor(input, offset, line, column) {
+  /**
+   * Creates parser state from specified input, source and initial position data.
+   *
+   * @param {string} input Chunk of data to parse. Actually any string-like object
+   * @param {*} source Any object, that will be available as `source` property of any `location()`.
+   *        For example, it can be file path from which `input` was read
+   * @param {number} offset Global offset, that corresponding to the first character in the `input`
+   * @param {number} line Global line, that corresponding to the first character in the `input`
+   * @param {number} column Global column, that corresponding to the first character in the `input`
+   */
+  constructor(input, source, offset = 0, line = 1, column = 1) {
     this.input = input;
+    this._source = source;
     this._offset = offset;
     this._mark = offset;
     this._expected = [];
@@ -152,6 +163,7 @@ class ParserState {
     let endPosDetails   = this._computePosDetails(endPos);
 
     return {
+      source: this._source,
       start: {
         offset: startPos,
         line:   startPosDetails.line,

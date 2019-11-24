@@ -1,6 +1,6 @@
 {
   "name": "@pegjs2/runtime",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "JS runtime support for parsers generated with pegjs2 (https://github.com/Mingun/pegjs)",
   "repository": "Mingun/pegjs2-runtime-js",
   "scripts": {
